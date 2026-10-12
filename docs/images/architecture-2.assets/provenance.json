@@ -1,0 +1,169 @@
+{
+  "repository": "nthewara/Azure-Design",
+  "revision": "66a02eb9695a2efeb44d40544768798c9f4bfcb4",
+  "license": "GPL-3.0",
+  "licenseSource": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/LICENSE",
+  "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "icons": {
+    "linuxvm": {
+      "source": "SVG_Azure_Grouped/Compute/Virtual Machine Linux.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Compute/Virtual%20Machine%20Linux.svg",
+      "file": "linuxvm.svg",
+      "fileId": "00b42f920e7e6625ee0fcd7d08c975ee1dedc9cc728c0b283c29c7da7fd7c6aa",
+      "sha256": "00b42f920e7e6625ee0fcd7d08c975ee1dedc9cc728c0b283c29c7da7fd7c6aa",
+      "bytes": 14356,
+      "width": 56.689928,
+      "height": 51.025603,
+      "viewBox": [
+        0,
+        0,
+        56.689928,
+        51.025603
+      ]
+    },
+    "guestvm": {
+      "source": "SVG_Azure_Grouped/Compute/Virtual Machine Non-Azure Linux.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Compute/Virtual%20Machine%20Non-Azure%20Linux.svg",
+      "file": "guestvm.svg",
+      "fileId": "f68d2a63447cd43c6bb678a478fc967d31c424066f4b1e1ea486118c2bc7f452",
+      "sha256": "f68d2a63447cd43c6bb678a478fc967d31c424066f4b1e1ea486118c2bc7f452",
+      "bytes": 14353,
+      "width": 56.689928,
+      "height": 51.025603,
+      "viewBox": [
+        0,
+        0,
+        56.689928,
+        51.025603
+      ]
+    },
+    "openshift": {
+      "source": "SVG_Azure_Grouped/Deployment/OpenShift cluster.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Deployment/OpenShift%20cluster.svg",
+      "file": "openshift.svg",
+      "fileId": "758bc0c8626ad1107e42c4fd8c431848121b8bbc9fb44b0e7d02a9db1f1e9bee",
+      "sha256": "758bc0c8626ad1107e42c4fd8c431848121b8bbc9fb44b0e7d02a9db1f1e9bee",
+      "bytes": 5770,
+      "width": 53.858502,
+      "height": 49.765885,
+      "viewBox": [
+        0,
+        0,
+        53.858502,
+        49.765885
+      ]
+    },
+    "routeserver": {
+      "source": "SVG_Azure_Grouped/Networking/Route Server.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Networking/Route%20Server.svg",
+      "file": "routeserver.svg",
+      "fileId": "95e5fc239d832ad35d9936f92d95da5db5ae96ad6e5fe034e7de453608d20777",
+      "sha256": "95e5fc239d832ad35d9936f92d95da5db5ae96ad6e5fe034e7de453608d20777",
+      "bytes": 5482,
+      "width": 56.692597,
+      "height": 56.693,
+      "viewBox": [
+        0,
+        0,
+        56.692597,
+        56.693
+      ]
+    },
+    "vnet": {
+      "source": "SVG_Azure_Grouped/Networking/Virtual Network.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Networking/Virtual%20Network.svg",
+      "file": "vnet.svg",
+      "fileId": "15a3d9c3e79d49bfa317045a83dd94130b28870795d04510f8086257eb5cb39d",
+      "sha256": "15a3d9c3e79d49bfa317045a83dd94130b28870795d04510f8086257eb5cb39d",
+      "bytes": 5397,
+      "width": 56.70003,
+      "height": 34.010825,
+      "viewBox": [
+        0,
+        0,
+        56.70003,
+        34.010825
+      ]
+    },
+    "subnet": {
+      "source": "SVG_Azure_Grouped/Networking/Virtual Subnet.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Networking/Virtual%20Subnet.svg",
+      "file": "subnet.svg",
+      "fileId": "ff3339021cf602413403a33702dc335ab34c8409b7f48f0036de70859ceb3566",
+      "sha256": "ff3339021cf602413403a33702dc335ab34c8409b7f48f0036de70859ceb3566",
+      "bytes": 5177,
+      "width": 56.701039,
+      "height": 42.524403,
+      "viewBox": [
+        0,
+        0,
+        56.701039,
+        42.524403
+      ]
+    },
+    "nsg": {
+      "source": "SVG_Azure_Grouped/Networking/Network Security Group.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Networking/Network%20Security%20Group.svg",
+      "file": "nsg.svg",
+      "fileId": "42ce7fae850b6ed8dc704ebf21c0c476bb45bfe7ebbbafe6c7aac88247076edb",
+      "sha256": "42ce7fae850b6ed8dc704ebf21c0c476bb45bfe7ebbbafe6c7aac88247076edb",
+      "bytes": 5232,
+      "width": 45.349495,
+      "height": 56.693184,
+      "viewBox": [
+        0,
+        0,
+        45.349495,
+        56.693184
+      ]
+    },
+    "peering": {
+      "source": "SVG_Azure_Grouped/Networking/Virtual Network Peering.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Networking/Virtual%20Network%20Peering.svg",
+      "file": "peering.svg",
+      "fileId": "b9a2e10e09074afeaae706e38c13042fb7a2a4da007d877c4f236fd969f8de93",
+      "sha256": "b9a2e10e09074afeaae706e38c13042fb7a2a4da007d877c4f236fd969f8de93",
+      "bytes": 7724,
+      "width": 56.705928,
+      "height": 48.188149,
+      "viewBox": [
+        0,
+        0,
+        56.705928,
+        48.188149
+      ]
+    },
+    "pip": {
+      "source": "SVG_Azure_Grouped/Networking/Public IP Address.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Networking/Public%20IP%20Address.svg",
+      "file": "pip.svg",
+      "fileId": "0b5f4d6c1b4740014b5b85e1c7423f61e9f27c7a4fef116c1aa81e943ec29901",
+      "sha256": "0b5f4d6c1b4740014b5b85e1c7423f61e9f27c7a4fef116c1aa81e943ec29901",
+      "bytes": 5195,
+      "width": 56.689782,
+      "height": 45.353896,
+      "viewBox": [
+        0,
+        0,
+        56.689782,
+        45.353896
+      ]
+    },
+    "group": {
+      "source": "SVG_Azure_Grouped/Management/Resource Group.svg",
+      "url": "https://raw.githubusercontent.com/nthewara/Azure-Design/66a02eb9695a2efeb44d40544768798c9f4bfcb4/SVG_Azure_Grouped/Management/Resource%20Group.svg",
+      "file": "group.svg",
+      "fileId": "d1f3658788553ee899684ca019472e4c1c6f87e973ecf94f560671ecb44c379b",
+      "sha256": "d1f3658788553ee899684ca019472e4c1c6f87e973ecf94f560671ecb44c379b",
+      "bytes": 7053,
+      "width": 56.695236,
+      "height": 53.908999,
+      "viewBox": [
+        0,
+        0,
+        56.695236,
+        53.908999
+      ]
+    }
+  }
+}
