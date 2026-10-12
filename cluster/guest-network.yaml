@@ -1,0 +1,29 @@
+# The guest network: a primary Layer2 user-defined network. Every pod and VM in the
+# namespace gets an address from 10.101.0.0/24 instead of the default pod network.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: arovirt-guests
+  labels:
+    # Must be set when the namespace is created; it cannot be added later.
+    k8s.ovn.org/primary-user-defined-network: ""
+---
+apiVersion: k8s.ovn.org/v1
+kind: ClusterUserDefinedNetwork
+metadata:
+  name: arovirt-guests
+  labels:
+    arovirt.io/advertise: "true"   # selected by route-advertisements.yaml
+spec:
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: arovirt-guests
+  network:
+    topology: Layer2
+    layer2:
+      role: Primary
+      subnets:
+        - 10.101.0.0/24
+      ipam:
+        mode: Enabled
+        lifecycle: Persistent   # a VM keeps its IP across restarts

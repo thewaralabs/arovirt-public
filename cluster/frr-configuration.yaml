@@ -1,0 +1,48 @@
+# BGP peering between the ARO workers (ASN 65001) and both Azure Route Server
+# instances (ASN 65515). Requires FRR and route advertisements to be enabled in the
+# cluster network operator first (scripts/03-configure-cluster.sh does this).
+#
+# This configuration advertises nothing by itself. RouteAdvertisements
+# (route-advertisements.yaml) makes OVN-Kubernetes generate one ovnk-generated-*
+# FRRConfiguration per worker that adds the guest network prefix.
+apiVersion: frrk8s.metallb.io/v1beta1
+kind: FRRConfiguration
+metadata:
+  name: route-server
+  namespace: openshift-frr-k8s
+  labels:
+    arovirt.io/bgp: route-server   # selected by route-advertisements.yaml
+spec:
+  nodeSelector:
+    matchLabels:
+      arovirt.io/bgp-speaker: "true"   # set on the workers by the script
+  bgp:
+    routers:
+      - asn: 65001
+        neighbors:
+          # Route Server BGP endpoints: the first two usable IPs of RouteServerSubnet.
+          # ebgpMultiHop because Route Server is in a different subnet from the workers.
+          - address: 10.0.4.4
+            asn: 65515
+            ebgpMultiHop: true
+            disableMP: true
+            toAdvertise:
+              allowed:
+                mode: all
+            toReceive:
+              allowed:
+                mode: filtered
+                prefixes:
+                  - prefix: 10.50.0.0/16   # accept only the client VNet
+          - address: 10.0.4.5
+            asn: 65515
+            ebgpMultiHop: true
+            disableMP: true
+            toAdvertise:
+              allowed:
+                mode: all
+            toReceive:
+              allowed:
+                mode: filtered
+                prefixes:
+                  - prefix: 10.50.0.0/16

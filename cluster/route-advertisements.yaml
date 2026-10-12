@@ -1,0 +1,24 @@
+# Advertises the guest network to Route Server over BGP.
+#
+# Once a network is advertised, OVN stops source-NATing its egress traffic, so the
+# guests lose internet access. Apply this only after the guests have finished
+# cloud-init (scripts/03-configure-cluster.sh waits for that).
+apiVersion: k8s.ovn.org/v1
+kind: RouteAdvertisements
+metadata:
+  name: arovirt-guests
+spec:
+  advertisements:
+    - PodNetwork
+  # Must be empty for PodNetwork. The FRRConfiguration's own nodeSelector limits the
+  # speakers to the labelled workers.
+  nodeSelector: {}
+  frrConfigurationSelector:
+    matchLabels:
+      arovirt.io/bgp: route-server
+  networkSelectors:
+    - networkSelectionType: ClusterUserDefinedNetworks
+      clusterUserDefinedNetworkSelector:
+        networkSelector:
+          matchLabels:
+            arovirt.io/advertise: "true"

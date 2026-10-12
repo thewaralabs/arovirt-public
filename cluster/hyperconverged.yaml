@@ -1,0 +1,9 @@
+apiVersion: hco.kubevirt.io/v1beta1
+kind: HyperConverged
+metadata:
+  name: kubevirt-hyperconverged
+  namespace: openshift-cnv
+spec:
+  # Skips importing the common boot images (six 30 GiB PVCs). The guests pull their
+  # own pinned image instead.
+  enableCommonBootImageImport: false

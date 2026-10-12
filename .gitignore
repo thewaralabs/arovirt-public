@@ -1,0 +1,5 @@
+lab.env
+.arovirt/
+*.pem
+*.key
+kubeconfig

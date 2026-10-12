@@ -1,0 +1,29 @@
+# OpenShift Virtualization operator. Needs the redhat-operators catalog, which needs
+# the Red Hat pull secret on the cluster.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-cnv
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: kubevirt-hyperconverged-group
+  namespace: openshift-cnv
+spec:
+  targetNamespaces:
+    - openshift-cnv
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: hco-operatorhub
+  namespace: openshift-cnv
+spec:
+  name: kubevirt-hyperconverged
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  channel: stable
+  installPlanApproval: Automatic

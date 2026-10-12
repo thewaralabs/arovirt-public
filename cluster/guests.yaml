@@ -1,0 +1,170 @@
+# Two Fedora guests on the advertised guest network.
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: fedora-a
+  namespace: arovirt-guests
+spec:
+  runStrategy: Always
+  dataVolumeTemplates:
+    - metadata:
+        name: fedora-a-root
+      spec:
+        source:
+          registry:
+            # Fedora cloud image, pinned to the linux/amd64 digest used in the lab.
+            url: docker://quay.io/containerdisks/fedora@sha256:1571d49ee43106e9c7cc4e9f487f6f885ee7c156dc5834fad87ad1e38768b778
+            pullMethod: node
+        storage:
+          resources:
+            requests:
+              storage: 30Gi
+  template:
+    metadata:
+      labels:
+        app: arovirt-guest
+    spec:
+      # Run on the BGP speakers, one guest per worker, so the demo covers both the
+      # local and the cross-worker (Geneve) path.
+      nodeSelector:
+        arovirt.io/bgp-speaker: "true"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: arovirt-guest
+              topologyKey: kubernetes.io/hostname
+      accessCredentials:
+        # Adds the key from Secret guest-ssh-key to the default "fedora" user.
+        - sshPublicKey:
+            source:
+              secret:
+                secretName: guest-ssh-key
+            propagationMethod:
+              noCloud: {}
+      domain:
+        cpu:
+          cores: 2
+        memory:
+          guest: 4Gi
+        devices:
+          disks:
+            - name: rootdisk
+              disk:
+                bus: virtio
+            - name: cloudinit
+              disk:
+                bus: virtio
+          interfaces:
+            # l2bridge gives the guest NIC the UDN address itself. The default
+            # masquerade binding would NAT a private 192.168.100.2 instead.
+            - name: default
+              binding:
+                name: l2bridge
+      networks:
+        - name: default
+          pod: {}   # the namespace's primary network, i.e. the guest UDN
+      volumes:
+        - name: rootdisk
+          dataVolume:
+            name: fedora-a-root
+        - name: cloudinit
+          cloudInitNoCloud:
+            # Packages must be installed before the network is advertised: after
+            # that, the guests have no internet access. The script checks for them
+            # through the guest agent before it applies route-advertisements.yaml.
+            userData: |
+              #cloud-config
+              packages:
+                - qemu-guest-agent
+                - tcpdump
+                - iperf3
+                - nmap-ncat
+              runcmd:
+                - [systemctl, enable, --now, qemu-guest-agent.service]
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: fedora-b
+  namespace: arovirt-guests
+spec:
+  runStrategy: Always
+  dataVolumeTemplates:
+    - metadata:
+        name: fedora-b-root
+      spec:
+        source:
+          registry:
+            # Fedora cloud image, pinned to the linux/amd64 digest used in the lab.
+            url: docker://quay.io/containerdisks/fedora@sha256:1571d49ee43106e9c7cc4e9f487f6f885ee7c156dc5834fad87ad1e38768b778
+            pullMethod: node
+        storage:
+          resources:
+            requests:
+              storage: 30Gi
+  template:
+    metadata:
+      labels:
+        app: arovirt-guest
+    spec:
+      # Run on the BGP speakers, one guest per worker, so the demo covers both the
+      # local and the cross-worker (Geneve) path.
+      nodeSelector:
+        arovirt.io/bgp-speaker: "true"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: arovirt-guest
+              topologyKey: kubernetes.io/hostname
+      accessCredentials:
+        # Adds the key from Secret guest-ssh-key to the default "fedora" user.
+        - sshPublicKey:
+            source:
+              secret:
+                secretName: guest-ssh-key
+            propagationMethod:
+              noCloud: {}
+      domain:
+        cpu:
+          cores: 2
+        memory:
+          guest: 4Gi
+        devices:
+          disks:
+            - name: rootdisk
+              disk:
+                bus: virtio
+            - name: cloudinit
+              disk:
+                bus: virtio
+          interfaces:
+            # l2bridge gives the guest NIC the UDN address itself. The default
+            # masquerade binding would NAT a private 192.168.100.2 instead.
+            - name: default
+              binding:
+                name: l2bridge
+      networks:
+        - name: default
+          pod: {}   # the namespace's primary network, i.e. the guest UDN
+      volumes:
+        - name: rootdisk
+          dataVolume:
+            name: fedora-b-root
+        - name: cloudinit
+          cloudInitNoCloud:
+            # Packages must be installed before the network is advertised: after
+            # that, the guests have no internet access. The script checks for them
+            # through the guest agent before it applies route-advertisements.yaml.
+            userData: |
+              #cloud-config
+              packages:
+                - qemu-guest-agent
+                - tcpdump
+                - iperf3
+                - nmap-ncat
+              runcmd:
+                - [systemctl, enable, --now, qemu-guest-agent.service]
